@@ -1,0 +1,242 @@
+\usepackage[margin=0.65in, headsep=10pt, headheight=20pt,a4paper]{geometry}
+% General Preamble template
+\usepackage{amsmath, amssymb, amsfonts, mathtools, amsthm}
+\usepackage{tocbasic}
+\usepackage{esint}
+\usepackage{physics}
+\usepackage{footnote}
+\usepackage{kotex}
+\usepackage{enumerate}
+\usepackage[bottom]{footmisc}
+\usepackage{tabu}
+\usepackage{authblk}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{lipsum}
+\usepackage{optidef}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+\usepackage{dashrule}
+\usepackage{tocloft}
+\usepackage{makecell}
+\usepackage{pdfpages}
+\usepackage{listings}
+\usepackage{titlesec}
+\usepackage{lastpage}
+\usepackage{changepage}
+\usepackage[yyyymmdd,hhmmss]{datetime}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\ord}{\text{ord}}
+\newcommand{\di}{\mathrel{|}}
+\usepackage{stmaryrd}
+\newcommand{\contra}{\scalebox{1.5}{$\lightning$}}
+\setlength{\parindent}{0em}
+\theoremstyle{definition}
+
+\makeatletter
+\def\th@definition{%
+  \thm@headfont{\bfseries}
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+\everymath{\displaystyle}
+
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+
+
+
+\def\currentlecture{Lecture}%
+\newcommand{\lecture}[2]{
+    \newpage
+    \ifthenelse{\isempty{#2}}{%
+      \renewcommand{\currentlecture}{Lecture #1}%
+    }{%
+      \renewcommand{\currentlecture}{Lecture #1: #2}%
+    }%
+    \pagebreak
+    \section{\currentlecture}\label{\currentlecture}
+}
+
+
+
+% These are the fancy headers
+\usepackage{fancyhdr}
+\fancyhf{}
+\pagestyle{fancy}
+
+\renewcommand{\footrulewidth}{0.4pt}% Default \footrulewidth is 0pt
+\makeatother
+
+
+% Personal header
+\newcommand{\legn}[2]{\left(\frac{#1}{#2}\right)}
+\newcommand{\inner}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\st}{\text{ such that }}
+\newcommand{\for}{\text{ for }}
+\newcommand{\Setcond}[2]{ \left\{\, #1 \mid #2 \, \right\}}
+\newcommand{\setcond}[2]{\Setcond{#1}{#2}}
+\newcommand{\seq}[1]{ \left\langle #1 \right\rangle}
+\newcommand{\Set}[1]{ \left\{ #1 \right\}}
+\newcommand{\set}[1]{ \set{#1} }
+\newcommand{\halfline}{\vspace{0.5em}}
+\newcommand{\infig}[2]{\begin{figure}[H]\centering\includegraphics[width=#1\linewidth]{#2}\end{figure}}
+\newcommand{\infigcap}[3]{\begin{figure}[H]\centering\includegraphics[width=#1\linewidth]{#2}\caption{#3}\end{figure}}
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+\def\numberline#1{}
+\titleformat{\section}[block]{\Large\sffamily\bfseries}{\color{purple}\S\thesection}{1em}{}
+\titleformat{\subsection}[block]{\large\sffamily\bfseries}{\color{purple}\S\thesubsection}{1em}{}
+\renewcommand{\cftsecfont}{\bfseries\sffamily}
+\renewcommand{\cftsubsecfont}{\sffamily}
+\raggedbottom
+
+
+\def\ScribeStr{Wonseok Shin}
+\def\LecStr{??}
+\def\LecNum{??}
+\def\LecTitle{??}
+\def\LecDate{??}
+\def\CorTitle{??}
+\def\CorInfo{??}
+\newcommand{\Course}[1]{\def\@course{#1}}
+\newcommand{\Scribe}[1]{\def\ScribeStr{Scribe: #1}}
+\newcommand{\Scribes}[1]{\def\ScribeStr{Scribes: #1}}
+\newcommand{\Lecturer}[1]{\def\LecStr{Lecturer: #1}}
+\newcommand{\Lecturers}[1]{\def\LecStr{Lecturers: #1}}
+\newcommand{\LectureNumber}[1]{\def\LecNum{#1}}
+\newcommand{\LectureDate}[1]{\def\LecDate{#1}}
+\newcommand{\LectureTitle}[1]{\def\LecTitle{#1}}
+\newcommand{\CourseTitle}[1]{\def\CorTitle{#1}}
+\newcommand{\CourseInfo}[1]{\def\CorInfo{#1}}
+\newdimen\headerwidth
+
+\newcommand\invisiblesection[1]{%
+\refstepcounter{section}%
+\addcontentsline{toc}{section}{\protect\numberline{\thesection}\LecDate : #1}%
+\sectionmark{#1}}
+
+\newcommand{\NewLecture}{
+\noindent
+\thispagestyle{empty}
+\begin{center}
+  \framebox{
+    \vbox{
+      \sffamily
+      \headerwidth=\textwidth
+      \advance\headerwidth by -0.22in
+      \hbox to \headerwidth {{\CorTitle \hfill [\CorInfo]\hspace{-0.2em}}}
+      \vspace{4mm}
+      \hbox to \headerwidth {{\bfseries\Large \hfill Lecture \LecNum: {\LecTitle} \hfill}}
+      \vspace{2mm}
+      \hbox to \headerwidth {\hfill \LecDate \hfill}
+      \vspace{2mm}
+      \hbox to \headerwidth {{\LecStr \hfill Scribe : \ScribeStr}}
+      \invisiblesection{\LecTitle}
+      }
+    }
+\end{center}
+\vspace*{4mm}}
+
+
+
+
+\usepackage{thmtools}
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfdefinestyle{mdblackbox}{%
+    roundcorner = 8pt,
+    linewidth=1pt,
+    skipabove=12pt,
+    innerbottommargin=9pt,
+    skipbelow=2pt,
+    linecolor=black!30!,
+    nobreak=true,
+	backgroundcolor=RedViolet!5!gray!5,
+}
+\declaretheoremstyle[
+    headfont=\sffamily\bfseries\color{black},
+    mdframed={style=mdblackbox},
+    headpunct={\\[3pt]},
+    postheadspace={0pt}
+]{thmblackbox}
+\mdfdefinestyle{mdredbox}{%
+    roundcorner = 8pt,
+	linewidth=0.5pt,
+	skipabove=12pt,
+	frametitleaboveskip=5pt,
+	frametitlebelowskip=0pt,
+	skipbelow=2pt,
+	frametitlefont=\bfseries,
+	innertopmargin=4pt,
+	innerbottommargin=8pt,
+	nobreak=true,
+	backgroundcolor=Salmon!5,
+	linecolor=RawSienna,
+}
+\declaretheoremstyle[
+	headfont=\sffamily\bfseries\color{RawSienna},
+	mdframed={style=mdredbox},
+	headpunct={\\[3pt]},
+	postheadspace={0pt},
+]{thmredbox}
+\mdfdefinestyle{mdbluebox}{%
+	roundcorner = 8pt,
+	linewidth=1pt,
+	skipabove=12pt,
+	innerbottommargin=9pt,
+	skipbelow=2pt,
+	linecolor=blue!30,
+	nobreak=true,
+	backgroundcolor=TealBlue!5,
+}
+\declaretheoremstyle[
+	headfont=\sffamily\bfseries\color{MidnightBlue},
+	mdframed={style=mdbluebox},
+	headpunct={\\[3pt]},
+	postheadspace={0pt}
+]{thmbluebox}
+\declaretheorem[style=thmblackbox,name=Theorem,numberwithin=section]{theorem}
+\declaretheorem[style=thmblackbox,name=Lemma,sibling=theorem]{lemma}
+\declaretheorem[style=thmblackbox,name=Proposition,sibling=theorem]{proposition}
+\declaretheorem[style=thmblackbox,name=Corollary,sibling=theorem]{corollary}
+\declaretheorem[style=thmbluebox,name=Definition,sibling=theorem]{definition}
+\declaretheorem[style=thmblackbox,name=Theorem,numbered=no]{theorem*}
+\declaretheorem[style=thmblackbox,name=Lemma,numbered=no]{lemma*}
+\declaretheorem[style=thmblackbox,name=Proposition,numbered=no]{proposition*}
+\declaretheorem[style=thmblackbox,name=Corollary,numbered=no]{corollary*}
+\declaretheorem[style=thmblackbox,name=Algorithm,sibling=theorem]{algorithm}
+\declaretheorem[style=thmblackbox,name=Algorithm,numbered=no]{algorithm*}
+\declaretheorem[style=thmblackbox,name=Claim,sibling=theorem]{claim}
+\declaretheorem[style=thmblackbox,name=Claim,numbered=no]{claim*}
+\declaretheorem[style=thmredbox,name=Example,sibling=theorem]{example}
+\declaretheorem[style=thmredbox,name=Example,numbered=no]{example*}
+\declaretheorem[style=thmblackbox,name=Remark,sibling=theorem]{remark}
+\declaretheorem[style=thmblackbox,name=Remark,numbered=no]{remark*}
+
+\theoremstyle{definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{answer}[theorem]{Answer}
+\newtheorem{ques}[theorem]{Question}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{fact*}{Fact}
+\newtheorem*{answer*}{Answer}
+\newtheorem*{ques*}{Question}
+\newtheorem*{exercise*}{Exercise}
+\newtheorem*{problem*}{Problem}

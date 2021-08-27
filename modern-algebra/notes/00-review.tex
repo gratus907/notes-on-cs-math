@@ -1,0 +1,46 @@
+
+\setcounter{section}{-1}
+\LectureNumber{0}
+\LectureDate{-}
+\LectureTitle{Review of Modern Algebra I}
+\section{Review of Modern Algebra I}
+\subsection{기본 정의 돌아보기}
+\begin{definition}[Group]
+    집합 $G$가 이항연산 $*$에 대해 닫혀 있고, 다음의 axiom을 만족하면 군이라 한다.
+    \begin{itemize}
+        \item[G1] $*$연산이 Associative하다.
+        \item[G2] $*$연산의 항등원 $e$ 가 존재하여, $^\forall x \in G$, $e * x = x * e = x$.
+        \item[G3] $^\forall x \in G$, $*$연산의 역원 $x^{-1}$ 가 $G$에 존재하여, $x^{-1} * x = x * x^{-1} = e$
+    \end{itemize}
+\end{definition}
+추가로 $*$연산의 교환법칙이 성립하면 Abelian. 모든 원소가 $a^n$의 형태로 표현되는 group을 Cyclic이라 한다.
+
+몇가지 예시들. $n$개 원소의 permutation의 집합 $S_n$. 이들중 even permutation을 모은 $A_n$.
+
+Coset. Group G에서 정의된 Equivalence relation에 의해 눌려서 만들어지는 subgroup들의 집합을 생각.
+
+Direct product. 두개 이상의 군에 elementwise 연산을 준다.
+
+\begin{theorem}[Finitely Generated Abelian Group의 기본정리]
+    모든 Finitely generated Abelian group은 $\Z_{p_i}^{r_i}$ 들과 $\Z$의 direct product로 쓸 수 있다.
+\end{theorem}
+
+\begin{definition}[Homomorphism]
+    두 Group 사이에서 이항연산을 보존하는 mapping $\phi$ 를 homomorphism이라 한다.
+\end{definition}
+$\phi^{-1}(\Set{e'})$ 을 $\phi$의 Kernel이라 한다.
+
+\begin{theorem}[Homomorphism의 기본정리]
+    $\phi : G \to G'$ 의 Kernel이 $H$일 때, $\phi[G]$ 도 군이고, $\mu : G/H \to \phi[G]$ 를 자연스럽게 정의하면 isomorphism이다.
+\end{theorem}
+
+\begin{definition}[Normal Subgroup]
+    $G$의 subgroup $H$에 대해, left, right coset이 항상 같으면 - 즉, $gH = Hg$ - normal subgroup이라 한다. 또는, 모든 $g \in G, h \in H$에 대해 $ghg^{-1} \in H$ (즉, $gHg^{-1} = H$) 를 확인해도 충분하다.
+\end{definition}
+
+Proper nontrivial normal subgroup을 갖지 않으면 simple group이라 한다. $G$의 normal subgroup $M$에 대해, 자연스럽게 maximality를 정의한다. $G/M$ simple $\iff$ $M$ maximal.
+
+\begin{definition}[Center, Commutator]
+    $Z(G) = \Setcond{z \in G}{zg = gz \text{ for all } g \in G}$ 를 center 라 하고, $\Setcond{aba^{-1}b^{-1}}{a, b \in G}$ 를 commutator라 한다.
+
+\end{definition}
